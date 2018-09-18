@@ -2,6 +2,8 @@
 
 samba file server docker
 
+> **Note** : this is a not yet generalized version and requires token replacement ( ie. example.com, my.local, ip addresses ) so inspect carefully all files before execution
+
 ## prerequisites
 
 - [linux-scripts-utils](https://github.com/devel0/linux-scripts-utils)
