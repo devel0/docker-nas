@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#set -x
+
+if [ ! -e /.dockerenv ]; then echo "this script designed to run inside docker"; exit 1; fi
+
+echo "press ctrl+c to stop"
+
+read
+
+setfacl -b /nas
+chmod 755 /nas
+chown root:root /nas
+
+setfacl -b -m g:'MY\Domain Users':rX /nas/my
+chmod 770 /nas/my
+chown root:root /nas/my
+
+setfacl -b -m g:'MY\Domain Users':rX,g:'MY\Domain Admins':rwX /nas/my/HQ
+setfacl -d -m g:'MY\Domain Users':rX,g:'MY\Domain Admins':rwX /nas/my/HQ
+chmod 770 /nas/my/HQ
+chown root:root /nas/my/HQ
+
+setfacl -b -R -m g:'MY\Domain Users':wX,g:'MY\Domain Admins':rwX /nas/my/Recycle
+setfacl -d -R -m g:'MY\Domain Users':wX,g:'MY\Domain Admins':rwX /nas/my/Recycle
+chmod 770 /nas/my/Recycle
+chown root:root /nas/my/Recycle
+
